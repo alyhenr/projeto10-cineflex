@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { styled } from 'styled-components'
 import axios from 'axios'
 
@@ -36,7 +36,7 @@ const SessionsWrapper = styled.div`
         padding: 0;
     }
 
-    div>div>button {        
+    button {        
         width: 105px;
         height: 45px;        
 
@@ -84,15 +84,20 @@ const Sessions = () => {
                         <h3>{session?.weekday} - {session?.date}</h3>
                         <div>
                             {session?.showtimes?.map(showtime => (
-                                <button key={showtime.id}>
-                                    {showtime.name}</button>
+                                <Link
+                                    key={showtime.id}
+                                    to={`/assentos/${showtime.id}`}
+                                >
+                                    <button>
+                                        {showtime.name}</button>
+                                </Link>
                             ))}
                         </div>
                     </div>
                 </SessionsWrapper>
             ))}
             <Footer pageInfo={{
-                session: true,
+                sessionPage: true,
                 data: sessionData,
             }}
             />

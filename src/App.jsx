@@ -6,6 +6,7 @@ import Navbar from './Components/Navbar';
 import Container from './Components/Container';
 import Home from './Pages/Home/Home';
 import Sessions from './Pages/Sessions/Sessions'
+import Seats from './Pages/Seats/Seats'
 
 axios.defaults.headers.common['Authorization'] = '0jOK4ACnS5v5hYCtV2MLlpoC';
 
@@ -19,6 +20,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/sessoes/:id' element={<Sessions />} />
+            <Route path='/assentos/:sessionID' element={<Seats />} />
           </Routes>
         </Container>
       </BrowserRouter>

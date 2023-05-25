@@ -28,16 +28,26 @@ const SCFooter = styled.div`
 
 
 const Footer = ({ pageInfo }) => {
-    console.log(pageInfo);
+
     return (
         <>
             <SCFooter>
-                {pageInfo.session &&
+                {Object.values(pageInfo.data).length > 0 &&
                     <>
-                        <img src={pageInfo.data?.posterURL} alt='movie poster' />
-                        <h2>{pageInfo.data?.title}</h2>
-                    </>
-                }
+                        <img src={pageInfo.data.posterURL} alt='movie poster' />
+                        <div style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-start",
+                            gap: "15px",
+
+                            marginLeft: "30px",
+                        }}>
+                            <h2>{pageInfo.data.title}</h2>
+                            {pageInfo.seatsPage &&
+                                <h2>{`${pageInfo.data.weekday} - ${pageInfo.data.time}`}</h2>}
+                        </div>
+                    </>}
             </SCFooter>
         </>
     )
