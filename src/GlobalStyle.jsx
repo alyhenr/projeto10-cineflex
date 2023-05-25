@@ -10,6 +10,7 @@ export default createGlobalStyle`
     }
 
     h1,h2,h3,h4,p {
+        font-weight: 400;
         font-family: 'Roboto';
         font-style: normal;
         text-align: center;

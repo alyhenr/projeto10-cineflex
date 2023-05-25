@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { styled } from 'styled-components'
 import axios from 'axios'
 
 import { API_URL_GET } from '../../api'
-import { styled } from 'styled-components'
+import Footer from '../../Components/Footer'
 
 const SessionsWrapper = styled.div`
     display: flex;
@@ -65,21 +66,19 @@ const SessionsWrapper = styled.div`
 `;
 
 const Sessions = () => {
-    const [sessionTimes, setSessionTimes] = useState([]);
+    const [sessionData, setSessionData] = useState([]);
     const { id } = useParams();
-    console.log(id);
 
     useEffect(() => {
         axios.get(API_URL_GET + `/${id}/showtimes`)
-            .then(res => setSessionTimes(res.data.days))
+            .then(res => setSessionData(res.data))
             .catch(res => console.log(res))
     }, [id])
 
-
     return (
         <>
-            <h1>Selecione o horário</h1>
-            {sessionTimes.map(session => (
+            <h1 style={{ fontSize: '24px' }}>Selecione o horário</h1>
+            {sessionData?.days?.map(session => (
                 <SessionsWrapper key={session.id}>
                     <div className='day'>
                         <h3>{session?.weekday} - {session?.date}</h3>
@@ -92,7 +91,11 @@ const Sessions = () => {
                     </div>
                 </SessionsWrapper>
             ))}
-
+            <Footer pageInfo={{
+                session: true,
+                data: sessionData,
+            }}
+            />
         </>
     )
 }

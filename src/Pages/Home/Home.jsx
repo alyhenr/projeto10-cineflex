@@ -48,20 +48,23 @@ const Home = () => {
 
     return (
         <>
-            <h1>Selecione o filme</h1>
-            {movies.length > 0 ? <MoviesWrapper>
-                {movies.map(movie => (
-                    <Link
-                        key={movie.id}
-                        to={`sessoes/${movie.id}`}
-                    >
-                        <li>
-                            <img src={movie.posterURL} alt="Movie Poster" />
-                        </li>
-                    </Link>
-                ))}
-            </MoviesWrapper> : "Loading..."}
+            {movies.length > 0 ? <>
+                <h1>Selecione o filme</h1>
+                <MoviesWrapper>
+                    {movies.map(movie => (
+                        <Link
+                            key={movie.id}
+                            to={`sessoes/${movie.id}`}
+                        >
+                            <li>
+                                <img src={movie.posterURL} alt="Movie Poster" />
+                            </li>
+                        </Link>
+                    ))}
+                </MoviesWrapper>
+            </> : "Loading..."}
         </>
+
     )
 }
 
