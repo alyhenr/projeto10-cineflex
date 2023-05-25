@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import axios from 'axios'
+import { styled } from 'styled-components';
 
 import { API_URL_GET } from "../../api";
-import { styled } from 'styled-components';
 
 const MoviesWrapper = styled.ul`
     display: flex;
-    flex-direction: row;
-    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    row-gap: 20px;
+    column-gap: 30px;
 
     padding: 50px 45px 30px;  
+    margin: 0 auto;
     
     flex-wrap: wrap;
 
@@ -20,6 +24,17 @@ const MoviesWrapper = styled.ul`
 
     li>img {
         width: 100%;
+
+        border-radius: 5px;
+        border: 1px solid grey;
+        box-shadow: 3px 3px 7px;
+
+        cursor: pointer;
+
+        &:hover {
+            scale: 1.01;
+            opacity: 0.85;
+        }
     }
 `;
 
@@ -34,13 +49,18 @@ const Home = () => {
     return (
         <>
             <h1>Selecione o filme</h1>
-            <MoviesWrapper>
+            {movies.length > 0 ? <MoviesWrapper>
                 {movies.map(movie => (
-                    <li key={movie.id}>
-                        <img src={movie.posterURL} alt="Movie Poster" />
-                    </li>
+                    <Link
+                        key={movie.id}
+                        to={`sessoes/${movie.id}`}
+                    >
+                        <li>
+                            <img src={movie.posterURL} alt="Movie Poster" />
+                        </li>
+                    </Link>
                 ))}
-            </MoviesWrapper>
+            </MoviesWrapper> : "Loading..."}
         </>
     )
 }
