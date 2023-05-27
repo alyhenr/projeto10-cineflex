@@ -65,7 +65,11 @@ const Seats = ({ setBuyerInfo }) => {
             })
     }, [sessionID]);
 
-    const handleClick = id => {
+    const handleClick = (isAvailable, id) => {
+        if (!isAvailable) {
+            alert("Esse assento não está disponível");
+            return;
+        }
         setSeats(prevState => (
             [...prevState].map((seat) => (
                 seat.id === id ? {
@@ -90,7 +94,10 @@ const Seats = ({ setBuyerInfo }) => {
             ...formData,
             ids: [...seats.filter(seat => seat.selected)].map(seat => seat.id),
         })
-            .then(() => navigate("/sucesso"))
+            .then((res) => {
+                navigate("/sucesso")
+                console.log(res);
+            })
             .catch(res => console.log(res));
     }
 
@@ -103,8 +110,7 @@ const Seats = ({ setBuyerInfo }) => {
                         data-test="seat"
                         key={seat.id}
                         bgcolor={seat.bgColor}
-                        disabled={!seat.isAvailable}
-                        onClick={() => handleClick(seat.id)}
+                        onClick={() => handleClick(seat.isAvailable, seat.id)}
                     >{seat.name < 10
                         ? `0${seat.name}`
                         : seat.name}</SCButton>

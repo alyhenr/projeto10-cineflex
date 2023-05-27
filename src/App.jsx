@@ -13,7 +13,7 @@ axios.defaults.headers.common['Authorization'] = '0jOK4ACnS5v5hYCtV2MLlpoC';
 
 const App = () => {
   const [buyerInfo, setBuyerInfo] = useState({});
-  console.log("Hello")
+
   return (
     <>
       <Navbar />
