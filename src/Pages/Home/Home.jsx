@@ -22,7 +22,7 @@ const MoviesWrapper = styled.ul`
         list-style-type: none;
     }
 
-    li>img {
+    li img {
         width: 100%;
 
         border-radius: 5px;
@@ -52,14 +52,13 @@ const Home = () => {
                 <h1>Selecione o filme</h1>
                 <MoviesWrapper>
                     {movies.map(movie => (
-                        <Link
-                            key={movie.id}
-                            to={`sessoes/${movie.id}`}
-                        >
-                            <li>
+                        <li data-test="movie" key={movie.id}>
+                            <Link
+                                to={`sessoes/${movie.id}`}
+                            >
                                 <img src={movie.posterURL} alt="Movie Poster" />
-                            </li>
-                        </Link>
+                            </Link>
+                        </li>
                     ))}
                 </MoviesWrapper>
             </> : "Loading..."}

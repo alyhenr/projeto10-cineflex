@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
+import PropTypes from "prop-types";
 import axios from "axios";
 
+import Form from "./Form";
 import Footer from "../../Components/Footer";
-import { seatsURL } from "../../api";
+import { API_URL_POST, seatsURL } from "../../api";
 
 const SCSeats = styled.div`
     display: flex;
@@ -14,7 +16,7 @@ const SCSeats = styled.div`
     flex-wrap: wrap;
     gap: 15px;
     
-    width: 85%;   
+    width: 55%;   
 
     margin-top: 30px;
 `;
@@ -26,7 +28,7 @@ const SCButton = styled.button`
     border: 1px solid #808F9D;
     border-radius: 50%;
 
-    cursor: pointer;    
+    cursor: pointer;   
 `;
 
 const seatsColor = {
@@ -35,10 +37,11 @@ const seatsColor = {
     "Indisponível": '#FBE192',
 };
 
-const Seats = () => {
+const Seats = ({ setBuyerInfo }) => {
     const [seats, setSeats] = useState([]);
     const [movieData, setMovieData] = useState({});
     const { sessionID } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(seatsURL(sessionID))
@@ -57,12 +60,12 @@ const Seats = () => {
                     title: res.data.movie.title,
                     weekday: res.data.day.weekday,
                     time: res.data.name,
+                    date: res.data.day.date,
                 })
             })
     }, [sessionID]);
 
     const handleClick = id => {
-        console.log("hello", id)
         setSeats(prevState => (
             [...prevState].map((seat) => (
                 seat.id === id ? {
@@ -74,17 +77,37 @@ const Seats = () => {
         ))
     }
 
+    const handleSubmit = (ev, formData) => {
+        ev.preventDefault();
+        setBuyerInfo({
+            ...formData,
+            title: movieData.title,
+            date: movieData.date,
+            time: movieData.time,
+            seats: seats.filter(seat => seat.selected)
+        })
+        axios.post(API_URL_POST, {
+            ...formData,
+            ids: [...seats.filter(seat => seat.selected)].map(seat => seat.id),
+        })
+            .then(() => navigate("/sucesso"))
+            .catch(res => console.log(res));
+    }
+
     return (
         <>
             <h1>Selecione o(s) assento(s)</h1>
             <SCSeats>
                 {seats.length > 0 && seats.map(seat => (
                     <SCButton
+                        data-test="seat"
                         key={seat.id}
                         bgcolor={seat.bgColor}
                         disabled={!seat.isAvailable}
                         onClick={() => handleClick(seat.id)}
-                    >{seat?.name}</SCButton>
+                    >{seat.name < 10
+                        ? `0${seat.name}`
+                        : seat.name}</SCButton>
                 ))}
             </SCSeats>
             <div
@@ -112,9 +135,14 @@ const Seats = () => {
                 </div>
             ))}
             </div>
+            <Form handleSubmit={handleSubmit} />
             <Footer pageInfo={{ seatsPage: true, data: movieData }} />
         </>
     )
+}
+
+Seats.propTypes = {
+    setBuyerInfo: PropTypes.func,
 }
 
 export default Seats

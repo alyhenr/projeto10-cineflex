@@ -10,25 +10,14 @@ const SessionsWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;    
+    justify-content: flex-start; 
+    gap: 10px;   
 
     width: 100%; 
-    margin-top: 40px;
+    margin: 20px auto;
+    padding: 5px 25px;
 
     div {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        gap: 10px;
-
-        width: 100%;
-
-        margin: 0 auto;
-        padding: 5px 25px;
-    }
-
-    div>div {
         display: flex;
         flex-direction: row;
         align-items: flex-start;
@@ -79,8 +68,8 @@ const Sessions = () => {
         <>
             <h1 style={{ fontSize: '24px' }}>Selecione o horário</h1>
             {sessionData?.days?.map(session => (
-                <SessionsWrapper key={session.id}>
-                    <div className='day'>
+                <SessionsWrapper data-test="movie-day" key={session.id}>
+                    <>
                         <h3>{session?.weekday} - {session?.date}</h3>
                         <div>
                             {session?.showtimes?.map(showtime => (
@@ -88,12 +77,12 @@ const Sessions = () => {
                                     key={showtime.id}
                                     to={`/assentos/${showtime.id}`}
                                 >
-                                    <button>
+                                    <button data-test="showtime">
                                         {showtime.name}</button>
                                 </Link>
                             ))}
                         </div>
-                    </div>
+                    </>
                 </SessionsWrapper>
             ))}
             <Footer pageInfo={{

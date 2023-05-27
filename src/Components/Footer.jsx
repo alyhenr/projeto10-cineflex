@@ -31,7 +31,7 @@ const Footer = ({ pageInfo }) => {
 
     return (
         <>
-            <SCFooter>
+            <SCFooter data-test="footer">
                 {Object.values(pageInfo.data).length > 0 &&
                     <>
                         <img src={pageInfo.data.posterURL} alt='movie poster' />
