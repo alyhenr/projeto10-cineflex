@@ -69,7 +69,7 @@ const SCInputWrapper = styled.div`
 
 const Form = ({ handleSubmit }) => {
     const [formData, setFormData] = useState({
-        nome: "",
+        name: "",
         cpf: "",
     })
 
@@ -83,7 +83,7 @@ const Form = ({ handleSubmit }) => {
         e.preventDefault();
         handleSubmit(e, formData);
         setFormData({
-            nome: "",
+            name: "",
             cpf: "",
         });
 
@@ -92,15 +92,15 @@ const Form = ({ handleSubmit }) => {
     return (
         <SCForm onSubmit={handleFormSubmit}>
             <SCInputWrapper>
-                <label htmlFor="nome">Nome do comprador:</label>
+                <label htmlFor="name">Nome do comprador:</label>
                 <input
                     data-test="client-name"
                     required
-                    id="nome"
-                    name="nome"
+                    id="name"
+                    name="name"
                     type="text"
                     placeholder='Digite seu nome...'
-                    value={formData.nome}
+                    value={formData.name}
                     onChange={handleChange}
                 />
             </SCInputWrapper>

@@ -94,7 +94,7 @@ const Success = ({ buyerInfo }) => {
             </div>
             <div data-test="client-info">
                 <h1>Comprador</h1>
-                <h3>Nome: {buyerInfo.nome}</h3>
+                <h3>Nome: {buyerInfo.name}</h3>
                 <h3>CPF: {buyerInfo.cpf}</h3>
             </div>
             <Link to='/'>

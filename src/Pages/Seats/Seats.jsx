@@ -7,6 +7,7 @@ import axios from "axios";
 import Form from "./Form";
 import Footer from "../../Components/Footer";
 import { API_URL_POST, seatsURL } from "../../api";
+import LoadingScreen from "../../Components/LoadingScreen";
 
 const SCSeats = styled.div`
     display: flex;
@@ -98,51 +99,53 @@ const Seats = ({ setBuyerInfo }) => {
                 navigate("/sucesso")
                 console.log(res);
             })
-            .catch(res => console.log(res));
+            .catch(() => alert("Falha ao reservar o(s) assento(s), por favor selecione novamente."));
     }
 
     return (
         <>
             <h1>Selecione o(s) assento(s)</h1>
-            <SCSeats>
-                {seats.length > 0 && seats.map(seat => (
-                    <SCButton
-                        data-test="seat"
-                        key={seat.id}
-                        bgcolor={seat.bgColor}
-                        onClick={() => handleClick(seat.isAvailable, seat.id)}
-                    >{seat.name < 10
-                        ? `0${seat.name}`
-                        : seat.name}</SCButton>
-                ))}
-            </SCSeats>
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: "40px",
-
-                    marginTop: "20px"
-                }}
-            >{Object.keys(seatsColor).map(status => (
-                <div key={status}
+            {Object.keys(seats).length > 0 ? <>
+                <SCSeats>
+                    {seats.length > 0 && seats.map(seat => (
+                        <SCButton
+                            data-test="seat"
+                            key={seat.id}
+                            bgcolor={seat.bgColor}
+                            onClick={() => handleClick(seat.isAvailable, seat.id)}
+                        >{seat.name < 10
+                            ? `0${seat.name}`
+                            : seat.name}</SCButton>
+                    ))}
+                </SCSeats>
+                <div
                     style={{
                         display: "flex",
-                        flexDirection: "column",
+                        justifyContent: "center",
                         alignItems: "center",
-                        gap: "10px",
-                    }}>
-                    <SCButton
-                        disabled="disabled"
-                        bgcolor={seatsColor[status]}
-                    >{seatsColor.status}</SCButton>
-                    <h4>{status}</h4>
+                        gap: "40px",
+
+                        marginTop: "20px"
+                    }}
+                >{Object.keys(seatsColor).map(status => (
+                    <div key={status}
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            gap: "10px",
+                        }}>
+                        <SCButton
+                            disabled="disabled"
+                            bgcolor={seatsColor[status]}
+                        >{seatsColor.status}</SCButton>
+                        <h4>{status}</h4>
+                    </div>
+                ))}
                 </div>
-            ))}
-            </div>
-            <Form handleSubmit={handleSubmit} />
-            <Footer pageInfo={{ seatsPage: true, data: movieData }} />
+                <Form handleSubmit={handleSubmit} />
+                <Footer pageInfo={{ seatsPage: true, data: movieData }} />
+            </> : <LoadingScreen />}
         </>
     )
 }

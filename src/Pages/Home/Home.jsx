@@ -4,6 +4,7 @@ import axios from 'axios'
 import { styled } from 'styled-components';
 
 import { API_URL_GET } from "../../api";
+import LoadingScreen from '../../Components/LoadingScreen';
 
 const MoviesWrapper = styled.ul`
     display: flex;
@@ -61,7 +62,7 @@ const Home = () => {
                         </li>
                     ))}
                 </MoviesWrapper>
-            </> : "Loading..."}
+            </> : <LoadingScreen />}
         </>
 
     )

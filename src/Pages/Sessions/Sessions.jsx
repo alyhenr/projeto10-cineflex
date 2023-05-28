@@ -5,6 +5,7 @@ import axios from 'axios'
 
 import { API_URL_GET } from '../../api'
 import Footer from '../../Components/Footer'
+import LoadingScreen from '../../Components/LoadingScreen'
 
 const SessionsWrapper = styled.div`
     display: flex;
@@ -66,30 +67,31 @@ const Sessions = () => {
 
     return (
         <>
-            <h1 style={{ fontSize: '24px' }}>Selecione o horário</h1>
-            {sessionData?.days?.map(session => (
-                <SessionsWrapper data-test="movie-day" key={session.id}>
-                    <>
-                        <h3>{session?.weekday} - {session?.date}</h3>
-                        <div>
-                            {session?.showtimes?.map(showtime => (
-                                <Link
-                                    key={showtime.id}
-                                    to={`/assentos/${showtime.id}`}
-                                >
-                                    <button data-test="showtime">
-                                        {showtime.name}</button>
-                                </Link>
-                            ))}
-                        </div>
-                    </>
-                </SessionsWrapper>
-            ))}
-            <Footer pageInfo={{
-                sessionPage: true,
-                data: sessionData,
-            }}
-            />
+            {sessionData?.days?.length > 0 ? <>
+                <h1 style={{ fontSize: '24px' }}>Selecione o horário</h1>
+                {sessionData?.days?.map(session => (
+                    <SessionsWrapper data-test="movie-day" key={session.id}>
+                        <>
+                            <h3>{session?.weekday} - {session?.date}</h3>
+                            <div>
+                                {session?.showtimes?.map(showtime => (
+                                    <Link
+                                        key={showtime.id}
+                                        to={`/assentos/${showtime.id}`}
+                                    >
+                                        <button data-test="showtime">
+                                            {showtime.name}</button>
+                                    </Link>
+                                ))}
+                            </div>
+                        </>
+                    </SessionsWrapper>
+                ))}
+                <Footer pageInfo={{
+                    sessionPage: true,
+                    data: sessionData,
+                }}
+                /> </> : <LoadingScreen />}
         </>
     )
 }
