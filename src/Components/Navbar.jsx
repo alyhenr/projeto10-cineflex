@@ -39,23 +39,23 @@ const SCNavbar = styled.div`
 `;
 
 const Navbar = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
-        <>
-            <SCNavbar>
-                {window.location.pathname !== '/' &&
-                    <img
-                        data-test="go-home-header-btn"
-                        onClick={() => navigate(-1)}
-                        src={arrowImg}
-                        alt="arrow back" />}
-                <Link to={'/'}>
-                    <h1>CINEFLEX</h1>
-                </Link>
-            </SCNavbar >
-        </>
-    )
-}
+  return (
+    <>
+      <SCNavbar>
+        {window.location.pathname !== '/' &&
+          <img
+            data-test="go-home-header-btn"
+            onClick={() => navigate(-1)}
+            src={arrowImg}
+            alt="arrow back" />}
+        <Link to={'/'}>
+          <h1>CINEFLEX</h1>
+        </Link>
+      </SCNavbar >
+    </>
+  )
+};
 
-export default Navbar
+export default Navbar;

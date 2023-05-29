@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { styled } from 'styled-components'
-import axios from 'axios'
+import { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { styled } from 'styled-components';
+import axios from 'axios';
 
-import { API_URL_GET } from '../../api'
-import Footer from '../../Components/Footer'
-import LoadingScreen from '../../Components/LoadingScreen'
+import { API_URL_GET } from '../../api';
+import Footer from '../../Components/Footer';
+import LoadingScreen from '../../Components/LoadingScreen';
 
 const SessionsWrapper = styled.div`
     display: flex;
@@ -94,6 +94,6 @@ const Sessions = () => {
                 /> </> : <LoadingScreen />}
         </>
     )
-}
+};
 
-export default Sessions
+export default Sessions;

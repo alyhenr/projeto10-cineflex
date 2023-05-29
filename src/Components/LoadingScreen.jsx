@@ -45,6 +45,6 @@ const LoadingScreen = () => {
             <div className="loader"></div>
         </SCWrapper>
     )
-}
+};
 
-export default LoadingScreen
+export default LoadingScreen;

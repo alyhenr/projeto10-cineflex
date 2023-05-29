@@ -51,10 +51,10 @@ const Footer = ({ pageInfo }) => {
             </SCFooter>
         </>
     )
-}
+};
 
 Footer.propTypes = {
     pageInfo: PropTypes.object,
 };
 
-export default Footer
+export default Footer;

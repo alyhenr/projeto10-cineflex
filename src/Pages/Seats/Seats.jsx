@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import PropTypes from "prop-types";
@@ -154,4 +154,4 @@ Seats.propTypes = {
     setBuyerInfo: PropTypes.func,
 }
 
-export default Seats
+export default Seats;

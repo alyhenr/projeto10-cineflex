@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
 import { styled } from 'styled-components';
 
 import { API_URL_GET } from "../../api";
@@ -66,6 +66,6 @@ const Home = () => {
         </>
 
     )
-}
+};
 
-export default Home
+export default Home;

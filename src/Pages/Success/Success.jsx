@@ -102,10 +102,10 @@ const Success = ({ buyerInfo }) => {
             </Link>
         </SCWrapper>
     )
-}
+};
 
 Success.propTypes = {
     buyerInfo: PropTypes.object,
-}
+};
 
-export default Success
+export default Success;

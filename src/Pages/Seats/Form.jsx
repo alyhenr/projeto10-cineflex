@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from 'styled-components'
 
@@ -120,10 +120,10 @@ const Form = ({ handleSubmit }) => {
             <button data-test="book-seat-btn" type='submit'>Reservar assento(s)</button>
         </SCForm>
     )
-}
+};
 
 Form.propTypes = {
     handleSubmit: PropTypes.func,
-}
+};
 
-export default Form
+export default Form;
