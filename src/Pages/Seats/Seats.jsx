@@ -75,8 +75,8 @@ const Seats = ({ setBuyerInfo }) => {
             [...prevState].map((seat) => (
                 seat.id === id ? {
                     ...seat,
-                    selected: true,
-                    bgColor: seatsColor["Selecionado"],
+                    selected: !seat.selected,
+                    bgColor: !seat.selected ? seatsColor["Selecionado"] : seatsColor["Disponível"],
                 } : { ...seat }
             ))
         ))
